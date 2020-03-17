@@ -10,18 +10,14 @@ import java.util.List;
 @Entity
 public class Skill extends AbstractEntity {
 
+    @NotBlank(message="Skill cannot be blank")
+    @Size(max=50, message="Description must be less than 200 characters")
+    private String description;
+
     @ManyToMany(mappedBy="skills")
     private List<Job> jobs = new ArrayList<>();
 
-    @Size (min = 10, max = 500, message = "Skill must be between 10 and 500 characters.")
-    @NotBlank
-    private String description;
-
-    public Skill(){}
-
-    public Skill (String description) {
-        this.description = description;
-    }
+    public Skill() { }
 
     public String getDescription() {
         return description;
@@ -29,9 +25,5 @@ public class Skill extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Job> getJobs() {
-        return jobs;
     }
 }
